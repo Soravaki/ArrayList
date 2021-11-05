@@ -10,11 +10,7 @@ public class IntArrayList {
     //add element to end of list
     public boolean add(int element){
         if ( size <= element){
-            int[] templist = new int[size+5];
-            for (int i=0; i<arraylist.length; i++){
-                templist[i] = arraylist[i];
-            }
-            arraylist = templist;
+            expandlist();
         }
         arraylist[elements] = element;
         elements++;
@@ -22,6 +18,13 @@ public class IntArrayList {
     }
     // insert element at index
     public boolean insert(int element, int index){
+        if ( size <= element){
+            expandlist();
+        }
+        for (int i=index; i<arraylist.length; i++){
+            int temp = arraylist[i+1];
+            arraylist[i+1] = arraylist[i];
+        }
         return true;
     }
     // remove element at index
@@ -35,6 +38,14 @@ public class IntArrayList {
     // returns the number of elements in list
     public int size(){
         return elements;
+    }
+    // expands arraylist by 5
+    public void expandlist(){
+        int[] templist = new int[size+5];
+        for (int i=0; i<arraylist.length; i++){
+            templist[i] = arraylist[i];
+        }
+        arraylist = templist;
     }
     // print the list
     public String toString(){
